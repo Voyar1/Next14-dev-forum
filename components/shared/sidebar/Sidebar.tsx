@@ -45,6 +45,7 @@ const Sidebar = () => {
           );
         })}
       </div>
+      <div>Signup</div>
     </aside>
   );
 };
