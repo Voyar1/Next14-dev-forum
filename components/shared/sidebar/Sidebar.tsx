@@ -1,6 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { sidebarLinks } from "@/constans";
+import { SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,7 +47,22 @@ const Sidebar = () => {
           );
         })}
       </div>
-      <div>Signup</div>
+
+      <SignedOut>
+        <div className="flex flex-col gap-3 ">
+          <Link href="/sign-in">
+            <Button className="small-medium btn-secondary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 font-bold shadow-none">
+              <span className="primary-text-gradient">Log in</span>
+            </Button>
+          </Link>
+
+          <Link href="/sign-up">
+            <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 font-bold shadow-none">
+              Sign Up
+            </Button>
+          </Link>
+        </div>
+      </SignedOut>
     </aside>
   );
 };
