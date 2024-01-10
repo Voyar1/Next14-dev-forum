@@ -41,7 +41,7 @@ const questions = [
     upvotes: 10,
     views: 100,
     answers: [], // Change to an empty array of objects or specify the type of answers
-    createdAt: new Date("2021-09-01T12:00:00.000Z"), // Use the Date object
+    createdAt: new Date("2024-01-10T20:36:00.000Z"), // Use the Date object
   },
 ];
 
