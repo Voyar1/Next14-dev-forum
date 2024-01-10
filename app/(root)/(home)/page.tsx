@@ -1,3 +1,4 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
 import LocalSearch from "@/components/shared/LocalSearch";
@@ -6,34 +7,42 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constans/filters";
 import Link from "next/link";
 
-const questions: [] = [
-  // {
-  //   _id: 1,
-  //   title:
-  //     "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
-  //   tags: [
-  //     { _id: 1, name: "javascript" },
-  //     { _id: 1, name: "python" },
-  //   ],
-  //   author: "John Doe",
-  //   upvotes: 10,
-  //   views: 100,
-  //   answers: 2,
-  //   createdAt: "2021-09-01T12:00:00.000Z",
-  // },
-  // {
-  //   _id: 2,
-  //   title: "How to center a div",
-  //   tags: [
-  //     { _id: 1, name: "javascript" },
-  //     { _id: 1, name: "python" },
-  //   ],
-  //   author: "John Doe",
-  //   upvotes: 10,
-  //   views: 100,
-  //   answers: 2,
-  //   createdAt: "2021-09-01T12:00:00.000Z",
-  // },
+const questions = [
+  {
+    _id: "1", // Change to string
+    title:
+      "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
+    tags: [
+      { _id: "1", name: "javascript" }, // Change _id to string
+      { _id: "2", name: "python" }, // Change _id to string
+    ],
+    author: {
+      _id: "3", // Change to string
+      name: "John Doe",
+      picture: "url/to/picture", // Add a placeholder picture URL
+    },
+    upvotes: 10,
+    views: 100,
+    answers: [], // Change to an empty array of objects or specify the type of answers
+    createdAt: new Date("2021-09-01T12:00:00.000Z"), // Use the Date object
+  },
+  {
+    _id: "2", // Change to string
+    title: "How to center a div",
+    tags: [
+      { _id: "3", name: "javascript" }, // Change _id to string
+      { _id: "4", name: "python" }, // Change _id to string
+    ],
+    author: {
+      _id: "5", // Change to string
+      name: "John Doe",
+      picture: "url/to/picture", // Add a placeholder picture URL
+    },
+    upvotes: 10,
+    views: 100,
+    answers: [], // Change to an empty array of objects or specify the type of answers
+    createdAt: new Date("2021-09-01T12:00:00.000Z"), // Use the Date object
+  },
 ];
 
 export default function Home() {
@@ -66,7 +75,19 @@ export default function Home() {
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0 ? (
-          questions.map(() => "QuestionCard")
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
         ) : (
           <NoResult
             title="There's no question to show"
