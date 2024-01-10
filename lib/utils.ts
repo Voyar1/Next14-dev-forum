@@ -24,3 +24,13 @@ export const getTimestamp = (createdAt: Date): string => {
     return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
   }
 };
+
+export const formatNumberWithExtension = (num: number): string => {
+  if (num >= 1e6) {
+    return (num / 1e6).toFixed(1) + "M";
+  } else if (num >= 1e3) {
+    return (num / 1e3).toFixed(1) + "K";
+  } else {
+    return num.toString();
+  }
+};

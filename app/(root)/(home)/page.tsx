@@ -38,8 +38,8 @@ const questions = [
       name: "John Doe",
       picture: "url/to/picture", // Add a placeholder picture URL
     },
-    upvotes: 10,
-    views: 100,
+    upvotes: 101111,
+    views: 10011111,
     answers: [], // Change to an empty array of objects or specify the type of answers
     createdAt: new Date("2024-01-10T20:36:00.000Z"), // Use the Date object
   },
