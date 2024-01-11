@@ -1,7 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const page = () => {
-  return <div>Ask question</div>;
+import Question from "@/components/forms/Question";
+
+const Page = () => {
+  return (
+    <div>
+      <div>
+        <Question />
+      </div>
+    </div>
+  );
 };
 
-export default page;
+export default Page;
