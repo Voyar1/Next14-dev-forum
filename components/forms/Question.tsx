@@ -19,6 +19,8 @@ import React, { useRef } from "react";
 import { QuestionsSchema } from "@/lib/validations";
 
 import { Editor } from "@tinymce/tinymce-react";
+import { Badge } from "../ui/badge";
+import Image from "next/image";
 
 const Question = () => {
   const { mode } = useTheme();
@@ -164,11 +166,34 @@ const Question = () => {
                 Tags <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
-                <Input
-                  placeholder="Add tags..."
-                  onKeyDown={(e) => handleInputKeyDown(e, field)}
-                  className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
-                />
+                <>
+                  <Input
+                    placeholder="Add tags..."
+                    onKeyDown={(e) => handleInputKeyDown(e, field)}
+                    className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                  />
+                  {field.value.length > 0 && (
+                    <div className="flex-start mt-2.5 gap-2.5">
+                      {field.value.map((tag: any) => {
+                        return (
+                          <Badge
+                            key={tag}
+                            className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
+                          >
+                            {tag}
+                            <Image
+                              src="/assets/icons/close.svg"
+                              alt="icon"
+                              width={12}
+                              height={12}
+                              className="cursor-pointer object-contain invert-0 dark:invert"
+                            />
+                          </Badge>
+                        );
+                      })}
+                    </div>
+                  )}
+                </>
               </FormControl>
               <FormDescription className="body-regular mt-2.5 text-light-500">
                 Add up to 3 tags to describe what your question is about
