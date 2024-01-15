@@ -70,6 +70,13 @@ const Question = () => {
       }
     }
   };
+
+  const handleTagRemove = (tag: string, field: any) => {
+    const newTags = field.value.filter((t: string) => t !== tag);
+
+    form.setValue("tags", newTags);
+  };
+
   return (
     <Form {...form}>
       <form
@@ -179,6 +186,7 @@ const Question = () => {
                           <Badge
                             key={tag}
                             className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
+                            onClick={() => handleTagRemove(tag, field)}
                           >
                             {tag}
                             <Image
