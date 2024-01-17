@@ -41,7 +41,14 @@ const Question = () => {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
-    console.log(values);
+
+    //   try {
+    //     make an async call to our API -> crteate a question
+    //     contain all form data
+    //     navigate to home page
+    //   } catch (error) {
+    //   } finally {
+    //   }
   }
 
   const handleInputKeyDown = (
