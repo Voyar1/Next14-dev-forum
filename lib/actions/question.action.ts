@@ -9,6 +9,7 @@ export async function createQuestion(params: any) {
   try {
     connectToDatabase();
 
+    // eslint-disable-next-line no-unused-vars
     const { title, content, tags, author, path } = params;
     // Create question
 
