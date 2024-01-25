@@ -25,7 +25,11 @@ import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
-const Question = () => {
+interface Props {
+  mongoUserId: string;
+}
+
+const Question = ({ mongoUserId }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,6 +55,7 @@ const Question = () => {
         title: values.title,
         content: values.explanation,
         tags: values.tags,
+        author: JSON.parse(mongoUserId),
       });
     } catch (error) {
     } finally {
