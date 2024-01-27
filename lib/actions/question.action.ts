@@ -3,9 +3,9 @@
 import Question from "@/database/question.model";
 import { connectToDatabase } from "../mongoose";
 import Tag from "@/database/tag.model";
-import { GetQuestionParams } from "./shared.types";
+import { GetQuestionsParams } from "./shared.types";
 
-export async function getQuestion(params: GetQuestionParams) {}
+export async function getQuestion(params: GetQuestionsParams) {}
 
 export async function createQuestion(params: any) {
   // eslint-disable-next-line no-empty
