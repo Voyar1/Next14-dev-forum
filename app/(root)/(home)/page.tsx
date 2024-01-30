@@ -5,47 +5,14 @@ import LocalSearch from "@/components/shared/LocalSearch";
 import NoResult from "@/components/shared/NoResult";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constans/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
-const questions = [
-  {
-    _id: "1", // Change to string
-    title:
-      "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
-    tags: [
-      { _id: "1", name: "javascript" }, // Change _id to string
-      { _id: "2", name: "python" }, // Change _id to string
-    ],
-    author: {
-      _id: "3", // Change to string
-      name: "John Doe",
-      picture: "url/to/picture", // Add a placeholder picture URL
-    },
-    upvotes: 10,
-    views: 100,
-    answers: [], // Change to an empty array of objects or specify the type of answers
-    createdAt: new Date("2021-09-01T12:00:00.000Z"), // Use the Date object
-  },
-  {
-    _id: "2", // Change to string
-    title: "How to center a div",
-    tags: [
-      { _id: "3", name: "javascript" }, // Change _id to string
-      { _id: "4", name: "python" }, // Change _id to string
-    ],
-    author: {
-      _id: "5", // Change to string
-      name: "John Doe",
-      picture: "url/to/picture", // Add a placeholder picture URL
-    },
-    upvotes: 101111,
-    views: 10011111,
-    answers: [], // Change to an empty array of objects or specify the type of answers
-    createdAt: new Date("2024-01-10T20:36:00.000Z"), // Use the Date object
-  },
-];
+export default async function Home() {
+  const result = await getQuestions({});
 
-export default function Home() {
+  console.log(result.questions);
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row">
@@ -74,8 +41,8 @@ export default function Home() {
       </div>
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

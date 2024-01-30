@@ -6,7 +6,7 @@ import Tag from "@/database/tag.model";
 import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
 import User from "@/database/user.model";
 
-export async function getQuestion(params: GetQuestionsParams) {
+export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
 
