@@ -22,9 +22,9 @@ const page = () => {
         <Filter
           filters={UserFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
-          containerClasses="hidden max-md:flex"
         />
       </div>
+      <section className="mt-12 flex flex-wrap gap-4"></section>
     </>
   );
 };
