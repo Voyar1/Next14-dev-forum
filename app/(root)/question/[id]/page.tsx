@@ -1,4 +1,6 @@
+import Metric from "@/components/shared/Metric";
 import { getQuestionById } from "@/lib/actions/question.action";
+import { formatNumberWithExtension, getTimestamp } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -26,6 +28,32 @@ const Page = async ({ params }) => {
           </Link>
           <div className="flex justify-end">Voting</div>
         </div>
+        <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
+          {result.title}
+        </h2>
+      </div>
+      <div className="mb-8 mt-5 flex flex-wrap gap-4">
+        <Metric
+          imgUrl="/assets/icons/clock.svg"
+          alt="clock icon"
+          value={` asked ${getTimestamp(result.createdAt)}`}
+          title="Asked"
+          textStyles="small-medium text-dark400_light800"
+        />
+        <Metric
+          imgUrl="/assets/icons/message.svg"
+          alt="message"
+          value={formatNumberWithExtension(result.answers.length)}
+          title="Answers"
+          textStyles="small-medium text-dark400_light800"
+        />
+        <Metric
+          imgUrl="/assets/icons/eye.svg"
+          alt="views"
+          value={formatNumberWithExtension(result.views)}
+          title="Views"
+          textStyles="small-medium text-dark400_light800"
+        />
       </div>
     </>
   );
