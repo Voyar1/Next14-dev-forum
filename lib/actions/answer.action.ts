@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 import Answer from "@/database/answer.model";
 import { connectToDatabase } from "../mongoose";
