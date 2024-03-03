@@ -1,5 +1,6 @@
 "use client";
 
+import { formatNumberWithExtension } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
@@ -40,6 +41,12 @@ const Votes = ({
             className="cursor-pointer"
             onClick={() => {}}
           />
+
+          <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
+            <p className="subtle-medium text-dark400_light900">
+              {formatNumberWithExtension(upvotes)}
+            </p>
+          </div>
         </div>
       </div>
     </div>
