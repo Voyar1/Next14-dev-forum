@@ -25,6 +25,8 @@ const Votes = ({
   hasdownVoted,
   hasSaved,
 }: Props) => {
+  const handleSave = () => {};
+  const handleVote = (action: string) => {};
   return (
     <div className="flex gap-5">
       <div className="flex-center gap-2.5">
@@ -39,7 +41,9 @@ const Votes = ({
             height={18}
             alt="upvote"
             className="cursor-pointer"
-            onClick={() => {}}
+            onClick={() => {
+              handleVote("upvote");
+            }}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
@@ -59,7 +63,9 @@ const Votes = ({
             height={18}
             alt="downvote"
             className="cursor-pointer"
-            onClick={() => {}}
+            onClick={() => {
+              handleVote("downvote");
+            }}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
@@ -69,6 +75,20 @@ const Votes = ({
           </div>
         </div>
       </div>
+      <Image
+        src={
+          hasSaved
+            ? "/assets/icons/star-filled.svg"
+            : "/assets/icons/star-red.svg"
+        }
+        width={18}
+        height={18}
+        alt="star"
+        className="cursor-pointer"
+        onClick={() => {
+          handleSave();
+        }}
+      />
     </div>
   );
 };
