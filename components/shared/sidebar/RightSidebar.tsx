@@ -29,7 +29,7 @@ const RightSidebar = () => {
             return (
               <Link
                 href={item.title}
-                key={item.title}
+                key={item._id}
                 className="flex items-center justify-between gap-7"
               >
                 <p className="body-medium text-dark500_light700">
