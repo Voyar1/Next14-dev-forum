@@ -1,6 +1,9 @@
 "use client";
 
-import { upvoteQuestion } from "@/lib/actions/question.action";
+import {
+  downvoteQuestion,
+  upvoteQuestion,
+} from "@/lib/actions/question.action";
 import { formatNumberWithExtension } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -56,6 +59,26 @@ const Votes = ({
       }
       // todo: show a toast
       return;
+    }
+    if (action === "downvote") {
+      if (type === "Question") {
+        await downvoteQuestion({
+          questionId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
+      } else if (type === "Answer") {
+        // await downvoteAnswer({
+        //   questionId: JSON.parse(itemId),
+        //   userId: JSON.parse(userId),
+        //   hasupVoted,
+        //   hasdownVoted,
+        //   path: pathname,
+        // });
+      }
+      // todo: show a toast
     }
   };
   return (
