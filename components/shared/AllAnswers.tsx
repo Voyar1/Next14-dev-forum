@@ -57,7 +57,7 @@ const AllAnswers = async ({
                     </p>
                   </div>
                 </Link>
-                <div className="flex justify-end">
+                <div className="flex justify-end gap-1">
                   <Votes
                     type="Answer"
                     itemId={JSON.stringify(answer._id)}
