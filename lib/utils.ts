@@ -34,3 +34,8 @@ export const formatNumberWithExtension = (num: number): string => {
     return num.toString();
   }
 };
+
+export const getJoinedDate = (dateObj: Date): string => {
+  const monthYear: string = `${dateObj.toLocaleString("default", { month: "long" })} ${dateObj.getFullYear()}`;
+  return monthYear;
+};
