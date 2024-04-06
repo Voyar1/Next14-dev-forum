@@ -20,6 +20,14 @@ const EditDeleteAction = ({ type, itemId }: Props) => {
           onClick={handleEdit}
         />
       )}
+      <Image
+        src="/assets/icons/trash.svg"
+        alt="Delete"
+        width={14}
+        height={14}
+        className="cursor-pointer object-contain"
+        onClick={handleDelete}
+      />
     </div>
   );
 };
