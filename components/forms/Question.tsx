@@ -38,12 +38,14 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
   const pathname = usePathname();
   const parsedQuestionDetails = JSON.parse(questionDetails || "");
 
+  const groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
       title: parsedQuestionDetails.title || "",
       explanation: parsedQuestionDetails.content || "",
-      tags: [],
+      tags: groupedTags || [],
     },
   });
 
