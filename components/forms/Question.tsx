@@ -21,7 +21,7 @@ import { QuestionsSchema } from "@/lib/validations";
 import { Editor } from "@tinymce/tinymce-react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { useRouter, usePathname } from "next/navigation";
 
 interface Props {
@@ -54,20 +54,30 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
     setIsSubmitting(true);
 
     try {
+      if (type === "Edit") {
+        await editQuestion({
+          questionId: parsedQuestionDetails._id,
+          title: values.title,
+          content: values.explanation,
+          path: pathname,
+        });
+        router.push(`/question/${parsedQuestionDetails._id}`);
+      } else {
+        await createQuestion({
+          title: values.title,
+          content: values.explanation,
+          tags: values.tags,
+          author: JSON.parse(mongoUserId),
+          path: pathname,
+
+          //  Navigate to home page
+        });
+
+        router.push("/");
+      }
       // make an async call to our API -> crteate a question
       // contain all form data
       // navigate to home page
-      await createQuestion({
-        title: values.title,
-        content: values.explanation,
-        tags: values.tags,
-        author: JSON.parse(mongoUserId),
-        path: pathname,
-
-        //  Navigate to home page
-      });
-
-      router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -209,6 +219,7 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
               <FormControl className="mt-3.5">
                 <>
                   <Input
+                    disabled={type === "Edit"}
                     placeholder="Add tags..."
                     onKeyDown={(e) => handleInputKeyDown(e, field)}
                     className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
@@ -220,16 +231,22 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
                           <Badge
                             key={tag}
                             className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
-                            onClick={() => handleTagRemove(tag, field)}
+                            onClick={() =>
+                              type !== "Edit"
+                                ? handleTagRemove(tag, field)
+                                : () => {}
+                            }
                           >
                             {tag}
-                            <Image
-                              src="/assets/icons/close.svg"
-                              alt="icon"
-                              width={12}
-                              height={12}
-                              className="cursor-pointer object-contain invert-0 dark:invert"
-                            />
+                            {type !== "Edit" && (
+                              <Image
+                                src="/assets/icons/close.svg"
+                                alt="icon"
+                                width={12}
+                                height={12}
+                                className="cursor-pointer object-contain invert-0 dark:invert"
+                              />
+                            )}
                           </Badge>
                         );
                       })}
