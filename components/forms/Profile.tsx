@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 interface Params {
   clerkId: string;
@@ -41,24 +42,112 @@ const Profile = ({ clerkId, user }: Params) => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mt-9 flex w-full gap-9"
+      >
         <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
+            <FormItem className="space-y-3.5">
+              <FormLabel>
+                Name <span className="text-primary-500">*</span>
+              </FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="Your name"
+                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem className="space-y-3.5">
+              <FormLabel>
+                Username <span className="text-primary-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Your username"
+                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  {...field}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="porftolioWebsite"
+          render={({ field }) => (
+            <FormItem className="space-y-3.5">
+              <FormLabel>Portfolio Link</FormLabel>
+              <FormControl>
+                <Input
+                  type="url"
+                  placeholder="Your portfolio URL"
+                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  {...field}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem className="space-y-3.5">
+              <FormLabel>Location</FormLabel>
+              <FormControl>
+                <Input
+                  type="url"
+                  placeholder="Where are you from"
+                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  {...field}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem className="space-y-3.5">
+              <FormLabel>Bio</FormLabel>
+              <FormControl>
+                <Textarea
+                  type="url"
+                  placeholder="What's special about you?"
+                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  {...field}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="mt-7 flex justify-end">
+          <Button type="submit" className="primary-gradient w-fit">
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
