@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,6 +22,8 @@ interface Params {
 }
 
 const Profile = ({ clerkId, user }: Params) => {
+  const [isSubmitting, setIsSubmitiing] = useState(false);
+
   const formSchema = z.object({
     username: z.string().min(2).max(50),
   });
@@ -44,7 +46,7 @@ const Profile = ({ clerkId, user }: Params) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-9 flex w-full gap-9"
+        className="mt-9 flex w-full flex-col gap-9"
       >
         <FormField
           control={form.control}
@@ -144,8 +146,12 @@ const Profile = ({ clerkId, user }: Params) => {
           )}
         />
         <div className="mt-7 flex justify-end">
-          <Button type="submit" className="primary-gradient w-fit">
-            Submit
+          <Button
+            type="submit"
+            className="primary-gradient w-fit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Saving..." : "Save"}
           </Button>
         </div>
       </form>
