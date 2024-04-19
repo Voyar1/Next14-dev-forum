@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,6 +14,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ProfileSchema } from "@/lib/validations";
+import { usePathname, useRouter } from "next/navigation";
+import { updateUser } from "@/lib/actions/user.action";
 
 interface Params {
   clerkId: string;
@@ -23,23 +25,45 @@ interface Params {
 
 const Profile = ({ clerkId, user }: Params) => {
   const [isSubmitting, setIsSubmitiing] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const formSchema = z.object({
-    username: z.string().min(2).max(50),
-  });
   const parsedUser = JSON.parse(user);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof ProfileSchema>>({
+    resolver: zodResolver(ProfileSchema),
     defaultValues: {
-      username: "",
+      name: parsedUser.name || "",
+      username: parsedUser.username || "",
+      portfolioWebsite: parsedUser.portfolioWebsite || "",
+      location: parsedUser.location || "",
+      bio: parsedUser.bio || "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  async function onSubmit(values: z.infer<typeof ProfileSchema>) {
+    setIsSubmitiing(true);
+
+    try {
+      // update user
+      await updateUser({
+        clerkId,
+        updateData: {
+          name: values.name,
+          username: values.username,
+          portfolioWebsite: values.portfolioWebsite,
+          location: values.location,
+          bio: values.bio,
+        },
+        path: pathname,
+      });
+      router.back();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitiing(false);
+    }
     console.log(values);
   }
   return (
@@ -90,7 +114,7 @@ const Profile = ({ clerkId, user }: Params) => {
         />
         <FormField
           control={form.control}
-          name="porftolioWebsite"
+          name="portfolioWebsite"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
               <FormLabel>Portfolio Link</FormLabel>
@@ -115,7 +139,6 @@ const Profile = ({ clerkId, user }: Params) => {
               <FormLabel>Location</FormLabel>
               <FormControl>
                 <Input
-                  type="url"
                   placeholder="Where are you from"
                   className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
@@ -134,7 +157,6 @@ const Profile = ({ clerkId, user }: Params) => {
               <FormLabel>Bio</FormLabel>
               <FormControl>
                 <Textarea
-                  type="url"
                   placeholder="What's special about you?"
                   className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
