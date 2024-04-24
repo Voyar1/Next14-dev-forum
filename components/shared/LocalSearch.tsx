@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "../ui/input";
 import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface CustomInputProps {
   route: string;
@@ -19,6 +20,13 @@ const LocalSearch = ({
   placeholder,
   otherClasses,
 }: CustomInputProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const query = searchParams.get("q");
+
+  const [search, setSearch] = useState(query || "");
   return (
     <div
       className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-[10px] px-4 ${otherClasses}`}
@@ -35,8 +43,8 @@ const LocalSearch = ({
       <Input
         type="text"
         placeholder={`${placeholder}...`}
-        // value=""
-        onChange={() => {}}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
         className="paragraph-regular no-focus placeholder background-light800_darkgradient border-none shadow-none outline-none"
       />
       {iconPosition === "right" && (
