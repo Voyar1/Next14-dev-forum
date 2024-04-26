@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { formUrlQuery } from "@/lib/utils";
 
 interface CustomInputProps {
   route: string;
@@ -36,8 +37,12 @@ const LocalSearch = ({
           key: "q",
           value: search,
         });
+
+        router.push(newUrl, { scroll: false });
       }
     }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
   }, [search, route, pathname, router, searchParams, query]);
 
   return (
