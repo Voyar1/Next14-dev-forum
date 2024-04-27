@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { formUrlQuery } from "@/lib/utils";
+import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 
 interface CustomInputProps {
   route: string;
@@ -39,6 +39,14 @@ const LocalSearch = ({
         });
 
         router.push(newUrl, { scroll: false });
+      } else {
+        if (pathname === route) {
+          const newUrl = removeKeysFromQuery({
+            params: searchParams.toString(),
+            keysToRemove: ["q"],
+          });
+          router.push(newUrl, { scroll: false });
+        }
       }
     }, 300);
 
