@@ -3,6 +3,7 @@ import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
 import LocalSearch from "@/components/shared/LocalSearch";
 import NoResult from "@/components/shared/NoResult";
+import Pagination from "@/components/shared/Pagination";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constans/filters";
 import { getQuestions } from "@/lib/actions/question.action";
@@ -68,6 +69,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           />
         )}
       </div>
+      <Pagination />
     </>
   );
 }
