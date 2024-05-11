@@ -69,7 +69,9 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           />
         )}
       </div>
-      <Pagination />
+      <div className="mt-10">
+        <Pagination />
+      </div>
     </>
   );
 }
