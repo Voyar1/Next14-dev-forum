@@ -28,12 +28,17 @@ const GlobalResult = () => {
 
       try {
         const res = await globalSearch({ query: global, type });
+        setResult(JSON.parse(res));
       } catch (error) {
         console.log(error);
       } finally {
         setIsLoading(false);
       }
     };
+
+    if (global) {
+      fetchResult();
+    }
   }, [global, type]);
 
   const renderLink = (type: string, id: string) => {
