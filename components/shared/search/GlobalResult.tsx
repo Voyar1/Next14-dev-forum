@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import GlobalFilters from "./GlobalFilters";
+import { globalSearch } from "@/lib/actions/general.action";
 
 const GlobalResult = () => {
   const searchParams = useSearchParams();
@@ -26,7 +27,7 @@ const GlobalResult = () => {
       setIsLoading(true);
 
       try {
-        //
+        const res = await globalSearch({ query: global, type });
       } catch (error) {
         console.log(error);
       } finally {
