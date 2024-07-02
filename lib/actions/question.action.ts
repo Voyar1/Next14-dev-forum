@@ -112,8 +112,21 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     // Create and interaction record for the user's ask_question action
 
+    await Interaction.create({
+      user: author,
+      action: "ask_question",
+      question: question._id,
+      tags: tagDocuments,
+    });
+
     //  Increment author's reputation by +5 for creating a question
-  } catch (error) {}
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } });
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getQuestionById(params: GetQuestionByIdParams) {
