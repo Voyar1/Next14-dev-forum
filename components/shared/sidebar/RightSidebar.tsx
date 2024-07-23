@@ -15,22 +15,27 @@ const RightSidebar = async () => {
       <div>
         <h3 className="h3-bold text-dark200_light900">Top questions</h3>
         <div className="mt-7 flex w-full flex-col gap-[30px]">
-          {hotQuestions.map((item) => (
-            <Link
-              href={`/question/${item._id}`}
-              key={item._id}
-              className="flex items-center justify-between gap-7"
-            >
-              <p className="body-medium text-dark500_light700">{item.title}</p>
-              <Image
-                src="/assets/icons/chevron-right.svg"
-                alt="chevron right"
-                width={16}
-                height={16}
-                className="invert-colors"
-              ></Image>
-            </Link>
-          ))}
+          {
+            // @ts-ignore
+            hotQuestions.map((item) => (
+              <Link
+                href={`/question/${item._id}`}
+                key={item._id}
+                className="flex items-center justify-between gap-7"
+              >
+                <p className="body-medium text-dark500_light700">
+                  {item.title}
+                </p>
+                <Image
+                  src="/assets/icons/chevron-right.svg"
+                  alt="chevron right"
+                  width={16}
+                  height={16}
+                  className="invert-colors"
+                ></Image>
+              </Link>
+            ))
+          }
         </div>
       </div>
       <div className="mt-16">
