@@ -21,6 +21,7 @@ const GlobalSearch = () => {
     const handleOutsideClick = (event: any) => {
       if (
         searchContainerRef.current &&
+        // @ts-ignore
         !searchContainerRef.current.contains(event.target)
       ) {
         setIsOpen(false);
