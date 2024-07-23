@@ -14,6 +14,7 @@ import React from "react";
 
 const Page = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
+
   let mongoUser;
 
   if (clerkId) {
@@ -21,6 +22,7 @@ const Page = async ({ params, searchParams }: any) => {
   }
 
   const result = await getQuestionById({ questionId: params.id });
+
   return (
     <>
       <div className="flex-start w-full flex-col">
@@ -57,30 +59,33 @@ const Page = async ({ params, searchParams }: any) => {
           {result.title}
         </h2>
       </div>
+
       <div className="mb-8 mt-5 flex flex-wrap gap-4">
         <Metric
           imgUrl="/assets/icons/clock.svg"
           alt="clock icon"
           value={` asked ${getTimestamp(result.createdAt)}`}
-          title="Asked"
+          title=" Asked"
           textStyles="small-medium text-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/message.svg"
           alt="message"
           value={formatNumberWithExtension(result.answers.length)}
-          title="Answers"
+          title=" Answers"
           textStyles="small-medium text-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/eye.svg"
-          alt="views"
+          alt="eye"
           value={formatNumberWithExtension(result.views)}
-          title="Views"
+          title=" Views"
           textStyles="small-medium text-dark400_light800"
         />
       </div>
+
       <ParseHTML data={result.content} />
+
       <div className="mt-8 flex flex-wrap gap-2">
         {result.tags.map((tag: any) => (
           <RenderTag
@@ -91,13 +96,15 @@ const Page = async ({ params, searchParams }: any) => {
           />
         ))}
       </div>
+
       <AllAnswers
         questionId={result._id}
         userId={mongoUser._id}
         totalAnswers={result.answers.length}
-        page={searchParams.page}
-        filter={searchParams.filter}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
       />
+
       <Answer
         question={result.content}
         questionId={JSON.stringify(result._id)}
