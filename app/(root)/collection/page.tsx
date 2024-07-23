@@ -6,7 +6,7 @@ import Pagination from "@/components/shared/Pagination";
 import { QuestionFilters } from "@/constans/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function Collection({ searchParams }: SearchParamsProps) {
   const { userId } = auth();
