@@ -237,6 +237,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
 export async function getUserInfo(params: GetUserByIdParams) {
   try {
     connectToDatabase();
+
     const { userId } = params;
 
     const user = await User.findOne({ clerkId: userId });
@@ -247,6 +248,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
 
     const totalQuestions = await Question.countDocuments({ author: user._id });
     const totalAnswers = await Answer.countDocuments({ author: user._id });
+
     const [questionUpvotes] = await Question.aggregate([
       { $match: { author: user._id } },
       {
@@ -258,7 +260,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
       {
         $group: {
           _id: null,
-          totalUpvotes: { $sum: "upvotes" },
+          totalUpvotes: { $sum: "$upvotes" },
         },
       },
     ]);
@@ -274,7 +276,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
       {
         $group: {
           _id: null,
-          totalUpvotes: { $sum: "upvotes" },
+          totalUpvotes: { $sum: "$upvotes" },
         },
       },
     ]);
@@ -289,7 +291,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
       },
     ]);
 
-    const criteria = [
+    const criteria: any = [
       { type: "QUESTION_COUNT" as BadgeCriteriaType, count: totalQuestions },
       { type: "ANSWER_COUNT" as BadgeCriteriaType, count: totalAnswers },
       {
@@ -313,6 +315,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
       totalQuestions,
       totalAnswers,
       badgeCounts,
+      reputation: user.reputation,
     };
   } catch (error) {
     console.log(error);
