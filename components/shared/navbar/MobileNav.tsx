@@ -23,7 +23,7 @@ const NavContent = () => {
           pathname === item.route;
 
         return (
-          <SheetClose key={item.route}>
+          <SheetClose key={item.route} asChild>
             <Link
               href={item.route}
               className={`${
@@ -37,7 +37,7 @@ const NavContent = () => {
                 alt={item.label}
                 width={20}
                 height={20}
-                className={`${isActive ? "" : "invert-colors"}  `}
+                className={`${isActive ? "" : "invert-colors"} `}
               />
               <p className={`${isActive ? "base-bold" : "base-medium"}`}>
                 {item.label}
@@ -73,7 +73,7 @@ const MobileNav = () => {
             height={23}
             alt="Dev Forum"
           />
-          <p className="h2-bold text-dark100_light900 font-spaceGrotesk ">
+          <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
             Dev <span className="text-primary-500">Flow</span>
           </p>
         </Link>
@@ -83,7 +83,7 @@ const MobileNav = () => {
           </SheetClose>
         </div>
         <SignedOut>
-          <div className="flex flex-col gap-3 ">
+          <div className="flex flex-col gap-3">
             <SheetClose asChild>
               <Link href="/sign-in">
                 <Button className="small-medium btn-secondary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 font-bold shadow-none">
